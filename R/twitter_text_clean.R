@@ -32,21 +32,30 @@
 
 twitter_text_clean <- function(x, dtm = TRUE,...) {
   clean <- x
+  # Removing NAs with a warning
   if(sum(is.na(clean)) != 0) {
     clean <- clean[!is.na(clean)]
     warning("NA values were found and removed") }
+  # Testing if the input is class character
   if(!is.character(clean)) {
     stop("Text must be of class character") }
+  # Testing if there are any empty string elements in character vector
+  # Removing with a warning
   if(sum((stringi::stri_isempty(clean))) != 0) {
     clean <- clean[clean != ""]
     warning("Empty strings detected and removed.")
   }
+ # Testing if there are unupported non-ASCII characters in input
   if(sum(stringi::stri_enc_mark(clean) != "ASCII") != 0) {
    stop("Non ASCII characters detected. Please check your input")
   }
+  # Replacing twitter handles: patterns that start with @ and any alphanumeric entries that are attached
   clean <- stringr::str_replace_all(clean, "@[A-Za-z]*","")
+  # Replacing retweet mention with pattern match
   clean <-  stringr::str_replace_all(clean, "RT", "")
+  # Rplacing all URLS: patterns that start with http
     clean <-  gsub("http.*", "", clean)
+    # Converting to a document-term matrix. Uses pre-processing functions of CreateDtm
   if(isTRUE(dtm)) {
     doc <- textmineR::CreateDtm(clean, lower = TRUE,
                                   remove_punctuation = TRUE,
@@ -54,9 +63,14 @@ twitter_text_clean <- function(x, dtm = TRUE,...) {
     return(doc)
   }
   else {
+    # Pre-processing manually if the output is a character vector
+    # lowercase
     clean <- tolower(clean)
+    # removing digits
     clean <- gsub('[[:digit:]]+', ' ', clean)
+    # removing punctuation
     clean <- gsub('[[:punct:]]+', ' ', clean)
+    #removing whitespace
     clean <- stringr::str_squish(clean)
     return(clean)
   }
