@@ -1,0 +1,24 @@
+Package: handyhelper
+Title: Pre-processing twitter text corpuses 
+Version: 0.1.0
+Authors@R: 
+    person(given = "Nirupama",
+           family = "Tamvada",
+           role = c("aut", "cre"),
+           email = "nirupama.tamvada@stat.ubc.ca")
+Description: Conveniently processes twitter text corpuses. Functionalities include removing re-tweets, twitter handles and URLs. The function also processes case, numeric digits, punctuation, whitespaces, and special characters. Corpuses can be easily converted to a Document Term Matrix, which is a format compatible with the majority of natural language processing techniques in R.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+ textmineR,
+ stringr,
+ rlang, 
+ stringi
+Depends: 
+    R (>= 2.10)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
