@@ -1,5 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/ntmv/handyhelper/workflows/R-CMD-check/badge.svg)](https://github.com/ntmv/handyhelper/actions)
+<!-- badges: end -->
 
 # handyhelper
 
@@ -91,7 +95,7 @@ ex2 <- twitter_text_clean(avengertweets$tweet, dtm = TRUE, doc_names = avengertw
 # Class is dgCMatrix as expected
 summary(ex2)
 #>    Length     Class      Mode 
-#>  60540000 dgCMatrix        S4
+#>  59850000 dgCMatrix        S4
 ```
 
 Lastly, we perform a basic text-mining function: generating the 10 ten
@@ -110,15 +114,17 @@ freq_doc <- textmineR::TermDocFreq(dtm = ex2)
 # The dplyr library is needed to run this code
 `%>%` <- magrittr::`%>%`
 freq_doc %>% dplyr::slice_max(term_freq, n = 10)
-#>                            term term_freq doc_freq       idf
-#> avengersendgame avengersendgame     13473    13468 0.1077337
-#> man                         man      2195     2185 1.9264344
-#> premiere               premiere      1611     1606 2.2343036
-#> ads                         ads      1457     1457 2.3316707
-#> marvel                   marvel      1283     1272 2.4674597
-#> captainamerica   captainamerica      1019     1019 2.6892284
-#> scarlett               scarlett       975      971 2.7374790
-#> win                         win       952      952 2.7572404
-#> cried                     cried       896      611 3.2007085
-#> chris                     chris       892      864 2.8542327
+#> # A tibble: 10 x 4
+#>    term            term_freq doc_freq   idf
+#>    <chr>               <dbl>    <int> <dbl>
+#>  1 avengersendgame     13391    13386 0.114
+#>  2 man                  2195     2185 1.93 
+#>  3 premiere             1611     1606 2.23 
+#>  4 ads                  1457     1457 2.33 
+#>  5 marvel               1283     1272 2.47 
+#>  6 captainamerica       1019     1019 2.69 
+#>  7 scarlett              975      971 2.74 
+#>  8 win                   952      952 2.76 
+#>  9 cried                 896      611 3.20 
+#> 10 chris                 892      864 2.85
 ```
