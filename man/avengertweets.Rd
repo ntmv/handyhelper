@@ -13,7 +13,7 @@ A data frame with 15000 rows and 2 variables:
 }
 }
 \source{
-\code{Kavita Lolayekar}. \code{Twitter Dataset - Avengers Endgame}. \url{https://www.kaggle.com/kavita5/twitter-dataset-avengersendgame/version/1}
+Kavita Lolayekar. Twitter Dataset - #AvengersEndgame. \url{https://www.kaggle.com/kavita5/twitter-dataset-avengersendgame/version/1}
 }
 \usage{
 avengertweets
