@@ -8,5 +8,5 @@
 #'   \item{id}{ID column}
 #'   ...
 #' }
-#' @source \code{Kavita Lolayekar}. \code{Twitter Dataset - Avengers Endgame}. \url{https://www.kaggle.com/kavita5/twitter-dataset-avengersendgame/version/1}
+#' @source Kavita Lolayekar. Twitter Dataset - #AvengersEndgame. \url{https://www.kaggle.com/kavita5/twitter-dataset-avengersendgame/version/1}
 "avengertweets"
