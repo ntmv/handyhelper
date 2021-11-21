@@ -25,10 +25,11 @@ Document Term Matrix, and 2) a character vector. A Document Term Matrix
 is the default as it is a commonly used input in many **R** text-mining
 packages. In addition to twitter-specific pre-processing, common text
 pre-processing is applied by default to both outputs: lower case
-conversion, removal of alphanumeric digits and whitespace reduction.
+conversion, removal of alphanumeric characters, punctuation, and
+whitespace reduction.
 
 handyhelper relies on excellently written text-manipulation functions
-from the `textmineR` and `stringr` package.
+from the `textmineR` `stringr`, and `stringi`packages.
 
 -   `twitter_text_clean` is a wrapper function for the `CreateDtm`
     function from the `textmineR` library. It removes all twitter
@@ -74,12 +75,12 @@ ex1 <- twitter_text_clean(avengertweets$tweet, dtm = FALSE)
 
 # Processed tweets
 head(ex1)
-#> [1] "literally nobody me avengersendgame"                                                                                             
-#> [2] "im emotional sorry x blackwidow captainamerica"                                                                                  
-#> [3] "saving these bingo cards for tomorrow avengersendgame"                                                                           
-#> [4] "man these avengersendgame ads are everywhere"                                                                                    
-#> [5] "we salute you captainamerica avengersendgame"                                                                                    
-#> [6] "direct the first non spoiler avengersendgame critic reactions are here and nearly all are exceptionally positive with many prais"
+#> [1] "literally nobody me avengersendgame"                                                                                      
+#> [2] "im emotional sorry x blackwidow captainamerica"                                                                           
+#> [3] "saving these bingo cards for tomorrow avengersendgame"                                                                    
+#> [4] "man these avengersendgame ads are everywhere"                                                                             
+#> [5] "we salute you captainamerica avengersendgame"                                                                             
+#> [6] "the first non spoiler avengersendgame critic reactions are here and nearly all are exceptionally positive with many prais"
 ```
 
 We can now choose to output to a Document Term Matrix. The `dtm` logical
@@ -95,7 +96,7 @@ ex2 <- twitter_text_clean(avengertweets$tweet, dtm = TRUE, doc_names = avengertw
 # Class is dgCMatrix as expected
 summary(ex2)
 #>    Length     Class      Mode 
-#>  59850000 dgCMatrix        S4
+#>  58065000 dgCMatrix        S4
 ```
 
 Lastly, we perform a basic text-mining function: generating the 10 ten
@@ -118,13 +119,45 @@ freq_doc %>% dplyr::slice_max(term_freq, n = 10)
 #>    term            term_freq doc_freq   idf
 #>    <chr>               <dbl>    <int> <dbl>
 #>  1 avengersendgame     13391    13386 0.114
-#>  2 man                  2195     2185 1.93 
+#>  2 man                  2184     2174 1.93 
 #>  3 premiere             1611     1606 2.23 
 #>  4 ads                  1457     1457 2.33 
-#>  5 marvel               1283     1272 2.47 
+#>  5 marvel               1279     1268 2.47 
 #>  6 captainamerica       1019     1019 2.69 
 #>  7 scarlett              975      971 2.74 
 #>  8 win                   952      952 2.76 
 #>  9 cried                 896      611 3.20 
 #> 10 chris                 892      864 2.85
 ```
+
+**This package was created as part of an assignment for my data analysis
+(Stats 545) class. It is not meant to be comprehensive**
+
+**I largely used this assignment as an opportunity to gain familiarity
+with regex patterns and matching. Several informative discussions on
+stackoverflow helped me put together this function:**
+
+<https://www.codeproject.com/Questions/641934/Regular-Expression-Pattern-with-wplus-and-its-beha>
+
+<https://stackoverflow.com/questions/25352448/remove-urls-from-string>
+
+<https://stackoverflow.com/questions/26813667/how-to-use-grep-gsub-to-find-exact-match>
+
+<https://stackoverflow.com/questions/31348453/how-do-i-clean-twitter-data-in-r>
+
+# Imports
+
+Tommy Jones (2021). textmineR: Functions for Text Mining and Topic
+Modeling. R package version 3.0.5.
+<https://CRAN.R-project.org/package=textmineR>
+
+Hadley Wickham (2019). stringr: Simple, Consistent Wrappers for Common
+String Operations. R package version 1.4.0.
+<https://CRAN.R-project.org/package=stringr>
+
+Gagolewski M (2021). “stringi: Fast and portable character string
+processing in R.” Journal of Statistical Software. to appear.
+
+Gagolewski M (2021). stringi: Fast and portable character string
+processing in R\_. R package version 1.7.5, &lt;URL:
+<https://stringi.gagolewski.com/>&gt;.

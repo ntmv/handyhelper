@@ -103,7 +103,7 @@ test_that("all RT are removed", {
 
 # All twitter handles and partial matches are removed
 test_that("all twitter handles and partial matches are removed", {
-  expect_true(sum(grepl('@[A-Za-z]*',
+  expect_true(sum(grepl('@\\w+',
                         twitter_text_clean(avengertweets$tweet, dtm = FALSE))) == 0)
   expect_equal("hi there",twitter_text_clean("@ hi there", dtm = FALSE))
 })
