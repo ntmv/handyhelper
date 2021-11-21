@@ -27,6 +27,9 @@
 #'# Can pass on additional arguments to CreateDtm
 #' twitter_text_clean(avengertweets$tweet, dtm = TRUE, doc_names = avengertweets$id, cpus = 2)
 #'
+#'
+#'
+#'
 #' @export
 
 
@@ -50,8 +53,9 @@ twitter_text_clean <- function(x, dtm = TRUE,...) {
    stop("Non ASCII characters detected. Please check your input")
   }
   # Replacing twitter handles: patterns that start with @ and any alphanumeric entries that are attached
-  clean <- stringr::str_replace_all(clean, "@[A-Za-z]*","")
-  # Replacing retweet mention with pattern match
+  # \w stands for words, digits and underscores
+  clean <- gsub("@\\w+", "", clean)
+  # Replacing retweet mention with exact pattern match
   clean <-  stringr::str_replace_all(clean, "RT", "")
   # Rplacing all URLS: patterns that start with http
     clean <-  gsub("http.*", "", clean)

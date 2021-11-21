@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+
 # handyhelper
 
 The goal of handyhelper is to enable convenient pre-processing of Twitter text data. 
@@ -25,9 +26,9 @@ Pre-processing Twitter text data requires unique steps. This is because tweets s
 
 These attributes of a tweet are redundant and hamper the performance of text-mining algorithms.  `handyhelper` provides a wrapper functionality for the `CreateDtm` function from the `textmineR` library. This additional functionality easily removes redundant attributes specific to twitter from text.
 
-The package offers the option to choose between two outputs 1) A Document Term Matrix, and 2) a character vector. A Document Term Matrix is the default as it is a commonly used input in many **R** text-mining packages. In addition to twitter-specific pre-processing, common text pre-processing is applied by default to both outputs: lower case conversion, removal of alphanumeric digits and whitespace reduction. 
+The package offers the option to choose between two outputs 1) A Document Term Matrix, and 2) a character vector. A Document Term Matrix is the default as it is a commonly used input in many **R** text-mining packages. In addition to twitter-specific pre-processing, common text pre-processing is applied by default to both outputs: lower case conversion, removal of alphanumeric characters, punctuation, and whitespace reduction. 
 
-handyhelper relies on excellently written text-manipulation functions from the `textmineR` and `stringr` package.
+handyhelper relies on excellently written text-manipulation functions from the `textmineR` `stringr`, and `stringi`packages.
 
 - `twitter_text_clean` is a wrapper function for the `CreateDtm` function from the `textmineR` library. It removes all twitter handles, retweet mentions (RT) and any tweet links from the input text. It additionally performs common text pre-processing steps: case conversion, removal of punctuation, removal of numeric digits and whitespace reduction (leading and trailing). The function outputs a Document Term Matrix by default, but can also output a character vector. NA values and blank entries are automatically removed.
 
@@ -88,3 +89,34 @@ freq_doc <- textmineR::TermDocFreq(dtm = ex2)
 `%>%` <- magrittr::`%>%`
 freq_doc %>% dplyr::slice_max(term_freq, n = 10)
 ```
+
+**This package was created as part of an assignment for my data analysis (Stats 545) class.
+It is not meant to be comprehensive**
+
+**I largely used this assignment as an opportunity to gain familiarity with regex patterns and matching. Several informative discussions on stackoverflow helped me put together this function:**
+
+https://www.codeproject.com/Questions/641934/Regular-Expression-Pattern-with-wplus-and-its-beha
+
+https://stackoverflow.com/questions/25352448/remove-urls-from-string
+
+https://stackoverflow.com/questions/26813667/how-to-use-grep-gsub-to-find-exact-match
+
+https://stackoverflow.com/questions/31348453/how-do-i-clean-twitter-data-in-r
+
+# Imports 
+
+Tommy Jones (2021). textmineR: Functions for Text Mining and Topic Modeling. R
+  package version 3.0.5. https://CRAN.R-project.org/package=textmineR
+
+Hadley Wickham (2019). stringr: Simple, Consistent Wrappers for Common String
+  Operations. R package version 1.4.0. https://CRAN.R-project.org/package=stringr
+  
+Gagolewski M (2021). “stringi: Fast and portable character string processing in R.”
+Journal of Statistical Software. to appear.
+
+Gagolewski M (2021). stringi: Fast and portable character string processing in R_.
+R package version 1.7.5, <URL: https://stringi.gagolewski.com/>.
+
+
+
+
